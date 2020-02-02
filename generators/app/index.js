@@ -1,57 +1,73 @@
 'use strict'
 
 const Generator = require('yeoman-generator');
-const chalk = require('chalk')
-const yosay = require('yosay')
+const chalk = require('chalk');
+const yosay = require('yosay');
+
+
+const prompts = {
+  project: {
+    type: 'input',
+    name: 'project',
+    message: 'What is the project name?',
+    default: '',
+    store: true,
+  },
+  description: {
+    type: 'input',
+    name: 'description',
+    message: 'What is the project about?',
+    default: '',
+    store: true,
+  },
+  author: {
+    type: 'input',
+    name: 'author',
+    message: 'Please, set the author name:',
+    default: '',
+    store: true,
+  },
+  package: {
+    type: 'input',
+    name: 'package',
+    message: 'What is the name of the root package?',
+    default: '',
+    store: true,
+  },
+  version: {
+    type: 'input',
+    name: 'version',
+    message: 'What is the initial version?',
+    default: '0.0.0',
+    store: true,
+  }
+};
 
 
 module.exports = class extends Generator {
     prompting() {
-        const greet = 'Welcome to ' + chalk.red('mechpig\'s python generator!');
-        this.log(yosay(greet));
+      const greet = 'Welcome to ' + chalk.red('mechpig\'s python generator!');
+      this.log(yosay(greet));
 
-        const prompts = [
-            {
-                type: 'input',
-                name: 'project',
-                message: 'What is project name?',
-                default: '',
-                store: true
-            },
-            {
-                type: 'input',
-                name: 'package',
-                message: 'What is the name of the root package?',
-                default: '',
-                store: true
-            },
-            {
-                type: 'input',
-                name: 'description',
-                message: 'What is the package about?',
-                default: '',
-                store: true
-            },
-            {
-                type: 'input',
-                name: 'author',
-                message: 'Please, set the author name:',
-                default: '',
-                store: true
-            },
-            {
-                type: 'input',
-                name: 'version',
-                message: 'What is the initial version?',
-                default: '0.0.0',
-                store: true
-            }
-        ];
-
-        return this.prompt(prompts).then(props => {
-            this.log(props);
-            this.props = props;
-        });
+      return (
+        this.prompt([
+          prompts.project,
+          prompts.description,
+          prompts.author,
+        ])
+        .then(projectProps =>
+          this.prompt([
+            { ...prompts.package, default: projectProps.project },
+            prompts.version,
+          ])
+          .then(packageProps => {
+            this.props = {
+              ...projectProps,
+              ...packageProps,
+            };
+          })
+        )
+      );
     }
 
     writing() {
