@@ -2,6 +2,7 @@
 name = "<%= package %>"
 version = "<%= version %>"
 description = "<%= description %>"
+repository = "<%- repository_url %>"
 authors = ["<%= author %>"]
 
 [tool.poetry.dependencies]

@@ -27,6 +27,12 @@ const prompts = {
     default: '',
     store: true,
   },
+  repositoryUrl: {
+    type: 'input',
+    name: 'repository_url',
+    message: 'What is the repository url?',
+    default: '',
+  },
   package: {
     type: 'input',
     name: 'package',
@@ -54,6 +60,7 @@ module.exports = class extends Generator {
           prompts.project,
           prompts.description,
           prompts.author,
+          prompts.repositoryUrl,
         ])
         .then(projectProps =>
           this.prompt([
