@@ -23,6 +23,10 @@ install-dev: ## install base and dev dependencies
 lint: ## lint code
 	poetry run flake8 src tests
 
+.PHONY: tdd
+tdd: ## start a TDD session (re-run test on saves)
+	poetry run ptw -- $(PYTEST_WATCH_ARGS)
+
 .PHONY: test
 test: ## run all tests
 	poetry run pytest $(PYTEST_TEST_ARGS)
