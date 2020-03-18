@@ -9,3 +9,36 @@ help: ## show this help
 generator-run:
 	@mkdir -p $(LOCAL_BUILD_DIR)
 	@cd $(LOCAL_BUILD_DIR); yo --no-insight ../generators/app/
+
+
+# Release
+
+CHANGELOG := CHANGELOG
+VERSION = `cat pyproject.toml | grep "^version =" | cut -f 3 -d ' ' | cut -d '"' -f 2`
+
+.PHONY: bump
+bump:
+	npm version $(INCREMENT) --git-tag-version false
+
+.PHONY: changelog
+changelog:
+	git-chglog -o $(CHANGELOG) -next-tag $(VERSION)
+
+.PHONY: release
+release: test
+	$(MAKE) bump INCREMENT=$(INCREMENT)
+	$(MAKE) changelog
+	$(MAKE) docs
+	git add . && git commit -m "release: $(VERSION)" && git tag -a "$(VERSION)" -m $(VERSION)
+
+.PHONY: major
+major: ## release a new major
+	$(MAKE) release INCREMENT='major'
+
+.PHONY: minor
+minor: ## release a new minor
+	$(MAKE) release INCREMENT='minor'
+
+.PHONY: patch
+patch: ## release a new patch
+	$(MAKE) release INCREMENT='patch'
