@@ -3,7 +3,7 @@ name = "<%= package %>"
 version = "<%= version %>"
 description = "<%= description %>"
 repository = "<%- repository_url %>"
-authors = ["<%= author %>"]
+authors = ["<%= author_name %> <<%= author_email %>>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"

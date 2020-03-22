@@ -20,10 +20,17 @@ const prompts = {
     default: '',
     store: true,
   },
-  author: {
+  authorName: {
     type: 'input',
-    name: 'author',
+    name: 'author_name',
     message: 'Please, set the author name:',
+    default: '',
+    store: true,
+  },
+  authorEmail: {
+    type: 'input',
+    name: 'author_email',
+    message: 'Please, set the author email:',
     default: '',
     store: true,
   },
@@ -59,7 +66,8 @@ module.exports = class extends Generator {
         this.prompt([
           prompts.project,
           prompts.description,
-          prompts.author,
+          prompts.authorName,
+          prompts.authorEmail,
           prompts.repositoryUrl,
         ])
         .then(projectProps =>
