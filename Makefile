@@ -10,11 +10,19 @@ generator-run:
 	@mkdir -p $(LOCAL_BUILD_DIR)
 	@cd $(LOCAL_BUILD_DIR); yo --no-insight ../generators/app/
 
+.PHONY: test
+test:
+	@echo "add some tests!"
+
+.PHONY: docs
+docs:
+	@echo "add some documentation!"
+
 
 # Release
 
-CHANGELOG := CHANGELOG
-VERSION = `cat pyproject.toml | grep "^version =" | cut -f 3 -d ' ' | cut -d '"' -f 2`
+CHANGELOG := CHANGELOG.md
+VERSION = `npm run --silent get-version`
 
 .PHONY: bump
 bump:
