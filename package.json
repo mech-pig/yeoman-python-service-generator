@@ -11,7 +11,7 @@
   "author": "mech-pig <7295856+mech-pig@users.noreply.github.com>",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "chalk": "^3.0.0",
+    "chalk": "^4.0.0",
     "yeoman-generator": "^4.2.0",
     "yosay": "^2.0.2"
   }
