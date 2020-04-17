@@ -8,25 +8,25 @@ options:
   commits:
     filters:
       Type:
-        - add
-        - change
+        - bump
         - deprecate
-        - remove
+        - feat
         - fix
         - refactor
-        - bump
         - release
+        - remove
+        - style
+        - test
     sort_by: Scope
 
   commit_groups:
     group_by: Type
     sort_by: Title
     title_maps:
-      add: Added
-      change: Changed
-      deprecate: Deprecations
-      remove: Removed
+      deprecate: Deprecated
       fix: Fixed
+      feat: Features
+      remove: Removed
       bump: Bumped
       refactor: Refactored
 

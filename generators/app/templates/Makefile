@@ -31,10 +31,14 @@ tdd: ## start a TDD session (re-run test on saves)
 test: ## run all tests
 	poetry run pytest $(PYTEST_TEST_ARGS)
 
+.PHONY: docs
+docs:
+	echo "add documentation!"
+
 
 # Release
 
-CHANGELOG := CHANGELOG
+CHANGELOG := CHANGELOG.md
 VERSION = `cat pyproject.toml | grep "^version =" | cut -f 3 -d ' ' | cut -d '"' -f 2`
 
 .PHONY: bump
